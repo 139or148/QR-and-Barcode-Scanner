@@ -12,11 +12,11 @@ let scanner = null;
   (async()=>{
      scanner = await Dynamsoft.DBR.BarcodeScanner.createInstance();
      scanner.onFrameRead = results => {for(let result of results){
-        confirm(result.barcodeText)};
+        //confirm(result.barcodeText)};
         //alert prompt
         
     };
-     scanner.onUnduplicatedRead = (txt, result) => {};
+     scanner.onUnduplicatedRead = (txt, result) => {alert(txt)};
      await scanner.show();
    })();
 </script>
