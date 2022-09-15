@@ -17,7 +17,10 @@ let scanner = null;
          //alert prompt
        //};       
     };
-     scanner.onUnduplicatedRead = (txt, result) => {alert(txt)};
+     scanner.onUnduplicatedRead = (txt, result) => {
+       alert(txt);
+       console.log(result);
+    };
      await scanner.show();
    })();
 </script>
