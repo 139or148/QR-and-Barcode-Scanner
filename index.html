@@ -14,11 +14,10 @@ let scanner = null;
      scanner.onFrameRead = results => {
        for(let result of results){
          confirm(result.barcodeText);
-         break;
          //alert prompt
        };       
     };
-     scanner.onUnduplicatedRead = (txt, result) => {};
+     
      await scanner.show();
    })();
 </script>
