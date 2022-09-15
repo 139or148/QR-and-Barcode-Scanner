@@ -13,11 +13,10 @@ let scanner = null;
      scanner = await Dynamsoft.DBR.BarcodeScanner.createInstance();
      scanner.onFrameRead = results => {
        for(let result of results){
-         message = result.barcodeText;
+         confirm(result.barcodeText);
          //alert prompt
        };   
      };  
-     confirm(message);
      await scanner.show();
    })();
 </script>
