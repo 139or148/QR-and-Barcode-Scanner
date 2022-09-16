@@ -4,50 +4,23 @@
 <body>
   
   
-<video id="video" width="640" height="480" autoplay></video>
+<script src="https://raw.githubusercontent.com/mebjas/html5-qrcode/master/minified/html5-qrcode.min.js"></script>
 
 <script>
-// Get the video element
-const video = document.querySelector('#video')
-// Check if device has camera
-if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-  // Use video without audio
-  const constraints = { 
-    video: true,
-    audio: false
-  }
-  
-  // Start video stream
-  navigator.mediaDevices.getUserMedia(constraints).then(stream => video.srcObject = stream);
-}
-  
-let formats;
-// Save all formats to formats var 
-BarcodeDetector.getSupportedFormats().then(arr => formats = arr);
-// Create new code detector with all supported formats
-const barcodeDetector = new BarcodeDetector({ formats });
-
- 
-// Detect code function 
-const detectCode = () => {
-  // Start detecting codes on to the video element
-  barcodeDetector.detect(video).then(codes => {
-    // If no codes exit function
-    if (codes.length === 0) return;
- 
-    for (const barcode of codes)  {
-      // Log the barcode to the console
-      console.log(barcode);
-    }
-  }).catch(err => {
-    // Log an error if one happens
-    console.error(err);
-  })
-}
-
-// Run detect code function every 100 milliseconds
-setInterval(detectCode, 100);
+// This method will trigger user permissions Html5Qrcode.getCameras().then(cameras => {
+      /**
+        * devices would be an array of objects of type:
+        * { id: "id", label: "label" }
+       */
+       if (devices && devices.length) {
+           var cameraId = devices[0].id;
+            // .. use this to start scanning.
+        }
+   }).catch(err => {
+        // handle err   
+});
 </script>
 
+  
 </body>
 </html>
