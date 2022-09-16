@@ -3,24 +3,23 @@
 <head><title>QR and Barcode Scanner</title></head>
 <body>
   
-<div id="reader"></div>
   
-<script src="https://raw.githubusercontent.com/mebjas/html5-qrcode/master/minified/html5-qrcode.min.js"></script>
-  
+<video id="video" width="640" height="480" autoplay></video>
+
 <script>
-// This method will trigger user permissions
-Html5Qrcode.getCameras().then(devices => {
-  /**
-   * devices would be an array of objects of type:
-   * { id: "id", label: "label" }
-   */
-  if (devices && devices.length) {
-    var cameraId = devices[0].id;
-    // .. use this to start scanning.
+// Get the video element
+const video = document.querySelector('#video')
+// Check if device has camera
+if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+  // Use video without audio
+  const constraints = { 
+    video: true,
+    audio: false
   }
-}).catch(err => {
-  // handle err
-});
+  
+  // Start video stream
+  navigator.mediaDevices.getUserMedia(constraints).then(stream => video.srcObject = stream);
+}
 </script>
 
 </body>
