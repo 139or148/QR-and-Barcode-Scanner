@@ -29,9 +29,7 @@ var html5QrCode = new Html5Qrcode.start(
       fps: 10,    // sets the framerate to 10 frame per second 
       qrbox: 250  // sets only 250 X 250 region of viewfinder to
                   // scannable, rest shaded.
- }.catch(err => {
-        alert(`Unable to start scanning, error: ${err}`) 
-}),
+ },
  qrCodeMessage => {
      // do something when code is read. For example:
      console.log(`QR Code detected: ${qrCodeMessage}`);
