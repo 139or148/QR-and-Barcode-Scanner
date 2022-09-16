@@ -11,7 +11,11 @@ Dynamsoft.DBR.BarcodeReader.license = "DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTE2N
 let scanner = null;
   (async()=>{
      scanner = await Dynamsoft.DBR.BarcodeScanner.createInstance();
-     scanner.onUniqueRead = result => console.log(result); //alert prompt
+     scanner.onUniqueRead = (txt, result) => {
+       alert(txt);
+       console.log(result);
+     };
+     //alert prompt
      await scanner.show();
    })();
 </script>
