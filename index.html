@@ -22,10 +22,11 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 }
   
 let formats;
-// Save all formats to formats var 
-BarcodeDetector.getSupportedFormats().then(arr => formats = arr);
 // Create new code detector with all supported formats
 const barcodeDetector = new BarcodeDetector({ formats });
+// Save all formats to formats var 
+BarcodeDetector.getSupportedFormats().then(arr => formats = arr);
+
  
 // Detect code function 
 const detectCode = () => {
