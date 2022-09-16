@@ -40,8 +40,10 @@ var html5QrCode = new Html5Qrcode.start(
  })
  .catch(err => {
      // Start failed, handle it. For example, 
-     alert(`Unable to start scanning, error: ${err}`);
- });
+     console.log(`Unable to start scanning, error: ${err}`);
+ }).catch(err => {
+        alert(`Unable to start scanning, error: ${err}`) 
+});
 </script>
 
   
