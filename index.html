@@ -57,18 +57,6 @@ body {
     
     
 <body>
-<div id="container">
-    <a id="btn-scan-qr">
-        <img src="https://t3.ftcdn.net/jpg/02/23/88/58/360_F_223885881_Zotk7yyvWJDvq6iWq2A9XU60iVJEnrzC.jpg"><!-- Photo from Adobe Stock-->
-    <a/>
-
-    <canvas hidden="" id="qr-canvas"></canvas>
-
-    <div id="qr-result" hidden="">
-        <span id="outputData"></span>
-    </div>
-</div>
-
 <script>
 const video = document.createElement("video");
 const canvasElement = document.getElementById("qr-canvas");
@@ -83,6 +71,7 @@ let scanning = false;
 qrcode.callback = (res) => {
   if (res) {
     outputData.innerText = res;
+    alert(res);
     scanning = false;
 
     video.srcObject.getTracks().forEach(track => {
