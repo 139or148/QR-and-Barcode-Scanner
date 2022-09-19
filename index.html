@@ -25,7 +25,6 @@ Html5Qrcode.getCameras().then(cameras => {
 // The only argument is the “id” of HTML element created above.
 var html5QrCode = new Html5Qrcode.start(
    cameraId, // retreived in the previous step.
-   alert("yes");
    {
       fps: 10,    // sets the framerate to 10 frame per second 
       qrbox: 250  // sets only 250 X 250 region of viewfinder to
@@ -43,6 +42,7 @@ var html5QrCode = new Html5Qrcode.start(
      // Start failed, handle it. For example, 
      console.log(`Unable to start scanning, error: ${err}`);
  });
+alert("yes");
 </script>
 
   
