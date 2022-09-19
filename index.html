@@ -65,27 +65,28 @@ body {
 const video = document.createElement("video");
 const canvasElement = document.getElementById("qr-canvas");
 const canvas = canvasElement.getContext("2d");    
+   
+start_scan();
     
 qrcode.callback = (res) => {
   if (res) {
     alert(res);
-      
-      video.srcObject.getTracks().forEach(track => {
-      track.stop();
-    });
+    start_scan();
   }
 };
-    
-navigator.mediaDevices
-  .getUserMedia({ video: { facingMode: "environment" } })
-  .then(function(stream) {
-    canvasElement.hidden = false;
-    video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
-    video.srcObject = stream;
-    video.play();
-    tick();
-    scan();
-    });
+
+function start_scan() {
+  navigator.mediaDevices
+    .getUserMedia({ video: { facingMode: "environment" } })
+    .then(function(stream) {
+      canvasElement.hidden = false;
+      video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
+      video.srcObject = stream;
+      video.play();
+      tick();
+      scan();
+      });
+}
     
 function tick() {
   canvasElement.height = video.videoHeight;
