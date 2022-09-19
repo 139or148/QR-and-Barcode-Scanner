@@ -90,7 +90,6 @@ qrcode.callback = (res) => {
   }
 };
     
-document.onload = () =>
   navigator.mediaDevices
     .getUserMedia({ video: { facingMode: "environment" } })
     .then(function(stream) {
@@ -103,7 +102,6 @@ document.onload = () =>
       video.play();
       tick();
       scan();
-    });
     
 function tick() {
   canvasElement.height = video.videoHeight;
