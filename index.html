@@ -1,43 +1,143 @@
 <!DOCTYPE html>
 <html>
+    
+    
 <head>
-    <title>Instascan</title>
-    <script src="https://github.com/schmich/instascan"></script>
-    <script type="text/javascript" src="instascan.min.js"></script>
-    <!-- 載入instascan.min.js -->
+<title>QR and Barcode Scanner</title>
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
 </head>
+    
+    
+<style>
+html {
+  height: 100%;
+}
 
+body {
+  font-family: sans-serif;
+  padding: 0 10px;
+  height: 100%;
+  background: black;
+  margin: 0;
+}
+
+h1 {
+  color: white;
+  margin: 0;
+  padding: 15px;
+}
+
+#container {
+  text-align: center;
+  margin: 0;
+}
+
+#qr-canvas {
+  margin: auto;
+  width: calc(100% - 20px);
+  max-width: 400px;
+}
+
+#btn-scan-qr {
+  cursor: pointer;
+}
+
+#btn-scan-qr img {
+  height: 10em;
+  padding: 15px;
+  margin: 15px;
+  background: white;
+}
+
+#qr-result {
+  font-size: 1.2em;
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 700px;
+  background-color: white;
+}
+</style>
+    
+    
 <body>
-    <video id="preview"></video>
-    <!-- 詢問是否允許開啟相機後，會顯示在這個元素裡 -->
-    <!-- ---------- -->
-    <!-- 以下程式面 -->
-    <script type="text/javascript">
-    let scanner = new Instascan.Scanner({
-        video: document.getElementById('preview')
-    });
-    // 開啟一個新的掃描
-    // 宣告變數scanner，在html<video>標籤id為preview的地方開啟相機預覽。
-    // Notice:這邊注意一定要用<video>的標籤才能使用，詳情請看他的github API的部分解釋。
+<div id="container">
+    <h1>QR Code Scanner</h1>
 
-    scanner.addListener('scan', function(content) {
-        console.log(content);
-    });
-    //開始偵聽掃描事件，若有偵聽到印出內容。
+    <a id="btn-scan-qr">
+        <img src="https://uploads.sitepoint.com/wp-content/uploads/2017/07/1499401426qr_icon.svg">
+    <a/>
 
-    Instascan.Camera.getCameras().then(function(cameras) {
-    //取得設備的相機數目
-        if (cameras.length > 0) {
-          ///若設備相機數目大於0 則先開啟第0個相機(程式的世界是從第零個開始的)
-            scanner.start(cameras[0]);
-        } else {
-          //若設備沒有相機數量則顯示"No cameras found";
-          //這裡自行判斷要寫什麼
-            console.error('No cameras found.');
-        }
-    }).catch(function(e) {
-        console.error(e);
+    <canvas hidden="" id="qr-canvas"></canvas>
+
+    <div id="qr-result" hidden="">
+        <b>Data:</b> <span id="outputData"></span>
+    </div>
+</div>
+
+<script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
+<script src="./src/qrCodeScanner.js"></script>
+<script>
+const qrcode = window.qrcode;
+
+const video = document.createElement("video");
+const canvasElement = document.getElementById("qr-canvas");
+const canvas = canvasElement.getContext("2d");
+
+const qrResult = document.getElementById("qr-result");
+const outputData = document.getElementById("outputData");
+const btnScanQR = document.getElementById("btn-scan-qr");
+
+let scanning = false;
+    
+qrcode.callback = (res) => {
+  if (res) {
+    outputData.innerText = res;
+    scanning = false;
+
+    video.srcObject.getTracks().forEach(track => {
+      track.stop();
     });
-    </script>
+
+    qrResult.hidden = false;
+    btnScanQR.hidden = false;
+    canvasElement.hidden = true;
+  }
+};
+    
+btnScanQR.onclick = () =>
+  navigator.mediaDevices
+    .getUserMedia({ video: { facingMode: "environment" } })
+    .then(function(stream) {
+      scanning = true;
+      qrResult.hidden = true;
+      btnScanQR.hidden = true;
+      canvasElement.hidden = false;
+      video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
+      video.srcObject = stream;
+      video.play();
+      tick();
+      scan();
+    });
+};
+    
+function tick() {
+  canvasElement.height = video.videoHeight;
+  canvasElement.width = video.videoWidth;
+  canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+
+  scanning && requestAnimationFrame(tick);
+}
+    
+function scan() {
+  try {
+    qrcode.decode();
+  } catch (e) {
+    setTimeout(scan, 300);
+  }
+}
+</script>
 </body>
+    
+    
 </html>
+<!--Reference: -->
