@@ -4,7 +4,7 @@
 <body>
 
 	
-<div id="reader" width="600px"></div>
+<div id="qr-reader" width="600px; margin-left: auto; margin-right: auto"></div>
 	
 <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
   
@@ -13,7 +13,7 @@ function onScanSuccess(decodedText, decodedResult) {
     console.log(`Code scanned = ${decodedText}`, decodedResult);
 }
 var html5QrcodeScanner = new Html5QrcodeScanner(
-	"qr-reader", { fps: 10, qrbox: 250 });
+    "qr-reader", { fps: 10, qrbox: 250 });
 html5QrcodeScanner.render(onScanSuccess);
 </script>  
   
