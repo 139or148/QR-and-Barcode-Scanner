@@ -58,13 +58,14 @@ body {
     
 <body>
 <script>
+    video.srcObject.getTracks().forEach(track => {
+      track.stop();
 qrcode.callback = (res) => {
   if (res) {
     alert(res);
   }
 };
     
-document.onload = 
 navigator.mediaDevices
   .getUserMedia({ video: { facingMode: "environment" } })
   .then(function(stream) {
