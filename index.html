@@ -72,8 +72,8 @@ start_scan();
 //After scan, get result of code
 qrcode.callback = (res) => {
   if (res) {
-    alert(res);
-    start_scan();
+    alert(res); //Show result
+    start_scan(); //Restart Camera
   }
 };
 
