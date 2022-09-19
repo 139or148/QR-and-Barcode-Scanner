@@ -69,6 +69,10 @@ const canvas = canvasElement.getContext("2d");
 qrcode.callback = (res) => {
   if (res) {
     alert(res);
+      
+      video.srcObject.getTracks().forEach(track => {
+      track.stop();
+    });
   }
 };
     
