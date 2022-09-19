@@ -16,7 +16,7 @@ function onScanSuccess(decodedText, decodedResult) {
 
 let config = { fps: 10, qrbox: {width: 250, height: 250} };
 let html5QrcodeScanner = new Html5QrcodeScanner(
-  "reader", config, /* verbose= */ false);
+  "reader", config, /* verbose= */ true);
 html5QrcodeScanner.render(onScanSuccess);
 </script>  
   
