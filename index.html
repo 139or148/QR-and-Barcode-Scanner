@@ -40,10 +40,15 @@ body {
 <body>
 <div id="container">
     <canvas hidden="" id="qr-canvas"></canvas>
+    <br>
+    <div>
+      <span id="outputData"></span>
+    </div>
 </div>      
     
 <script>
 //Camera and other settings
+const outputData = document.getElementById("outputData");
 const video = document.createElement("video");
 const canvasElement = document.getElementById("qr-canvas");
 const canvas = canvasElement.getContext("2d");    
@@ -53,7 +58,7 @@ start_scan();
 //After scan, get result of code
 qrcode.callback = (res) => {
   if (res) {
-    alert(res); //Show result
+    outputData.innerText = res; //Show result
     start_scan(); //Restart Camera
   }
 };
