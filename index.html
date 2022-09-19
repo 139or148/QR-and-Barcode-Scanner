@@ -58,8 +58,10 @@ body {
     
 <body>
 <script>
+    //Restart the camera first
     video.srcObject.getTracks().forEach(track => {
       track.stop();
+    });
 qrcode.callback = (res) => {
   if (res) {
     alert(res);
