@@ -62,12 +62,14 @@ body {
 </div>      
     
 <script>
+//Camera and other settings
 const video = document.createElement("video");
 const canvasElement = document.getElementById("qr-canvas");
 const canvas = canvasElement.getContext("2d");    
    
 start_scan();
-    
+  
+//After scan, get result of code
 qrcode.callback = (res) => {
   if (res) {
     alert(res);
@@ -75,6 +77,7 @@ qrcode.callback = (res) => {
   }
 };
 
+//Scan function
 function start_scan() {
   navigator.mediaDevices
     .getUserMedia({ video: { facingMode: "environment" } })
@@ -87,7 +90,8 @@ function start_scan() {
       scan();
       });
 }
-    
+   
+//Adjust Camera
 function tick() {
   canvasElement.height = video.videoHeight;
   canvasElement.width = video.videoWidth;
@@ -96,6 +100,7 @@ function tick() {
   true && requestAnimationFrame(tick);
 }
     
+//Try detect error
 function scan() {
   try {
     qrcode.decode();
