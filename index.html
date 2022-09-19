@@ -23,6 +23,7 @@ Html5Qrcode.getCameras().then(cameras => {
   
 // Create instance of the object.
 // The only argument is the “id” of HTML element created above.
+try{
 var html5QrCode = new Html5Qrcode.start(
    cameraId, // retreived in the previous step.
    {
@@ -41,8 +42,8 @@ var html5QrCode = new Html5Qrcode.start(
  .catch(err => {
      // Start failed, handle it. For example, 
      console.log(`Unable to start scanning, error: ${err}`);
- });
-alert("yes");
+ });}
+catch(err){alert(err.message)};
 </script>
 
   
