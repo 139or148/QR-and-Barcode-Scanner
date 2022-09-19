@@ -58,10 +58,6 @@ body {
     
 <body>
 <div id="container">
-    <a id="btn-scan-qr">
-        <img src="https://t3.ftcdn.net/jpg/02/23/88/58/360_F_223885881_Zotk7yyvWJDvq6iWq2A9XU60iVJEnrzC.jpg"><!-- Photo from Adobe Stock-->
-    <a/>
-
     <canvas hidden="" id="qr-canvas"></canvas>
 
     <div id="qr-result" hidden="">
@@ -91,10 +87,6 @@ qrcode.callback = (res) => {
     video.srcObject.getTracks().forEach(track => {
       track.stop();
     });
-
-    qrResult.hidden = false;
-    btnScanQR.hidden = false;
-    canvasElement.hidden = true;
   }
 };
     
