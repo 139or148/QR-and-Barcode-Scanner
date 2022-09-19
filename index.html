@@ -1,73 +1,43 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>QR Code Scanner</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-      html,
-      body {
-        padding: 0;
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-      }
-      .wrapper {
-        padding: 0 4rem;
-      }
-      #canvas {
-        position: absolute;
-      }
-      #scanned {
-        display: flex;
-        flex-direction: column;
-        gap:1rem;
-      }
-      #video-wrapper {
-        height: 480px;
-        position: relative;
-        border-radius: 10px;
-        overflow: hidden;
-      }
-    </style>
-  </head>
-  <body>
-    <template id="scaned-item">
-      <style>
-        .wrapper {
-          --gradient-start: #c471ed;
-          --gradient-end: #f7797d;
-          border: none;
-          border-radius: 1rem;
-          padding: 1rem;
-          background: linear-gradient(var(--gradient-start), var(--gradient-end));
-          box-shadow: 0 3px -3px 10px #000;
-        }
-        .wrapper span {
-          font-family: Arial, Helvetica, sans-serif;
-          color: white;
-          display: block;
-        }
-      </style>
-      <div class="wrapper">
-        <span>Value: <slot name="raw"></slot></span>
-        <span>Format: <slot name="format"></slot></span>
-      </div>
-    </template>
+<head>
+    <title>Instascan</title>
+    <script src="https://github.com/schmich/instascan"></script>
+    <script type="text/javascript" src="instascan.min.js"></script>
+    <!-- 載入instascan.min.js -->
+</head>
 
-    <div class="wrapper">
-      <h1>QR Code Scanner</h1>
-      <div style="display: flex; gap: 1rem">
-        <div id="video-wrapper">
-          <canvas id="canvas" width="640" height="480"></canvas>
-          <video id="video" width="640" height="480" autoplay></video>
-        </div>
-        <div>
-          <h1>Recently Scanned</h1>
-          <div id="scanned"></div>
-        </div>
-      </div>
-    </div>
-    <script src="./main.js" async></script>
-  </body>
+<body>
+    <video id="preview"></video>
+    <!-- 詢問是否允許開啟相機後，會顯示在這個元素裡 -->
+    <!-- ---------- -->
+    <!-- 以下程式面 -->
+    <script type="text/javascript">
+    let scanner = new Instascan.Scanner({
+        video: document.getElementById('preview')
+    });
+    // 開啟一個新的掃描
+    // 宣告變數scanner，在html<video>標籤id為preview的地方開啟相機預覽。
+    // Notice:這邊注意一定要用<video>的標籤才能使用，詳情請看他的github API的部分解釋。
+
+    scanner.addListener('scan', function(content) {
+        console.log(content);
+    });
+    //開始偵聽掃描事件，若有偵聽到印出內容。
+
+    Instascan.Camera.getCameras().then(function(cameras) {
+    //取得設備的相機數目
+        if (cameras.length > 0) {
+          ///若設備相機數目大於0 則先開啟第0個相機(程式的世界是從第零個開始的)
+            scanner.start(cameras[0]);
+        } else {
+          //若設備沒有相機數量則顯示"No cameras found";
+          //這裡自行判斷要寫什麼
+            console.error('No cameras found.');
+        }
+    }).catch(function(e) {
+        console.error(e);
+    });
+    </script>
+</body>
 </html>
