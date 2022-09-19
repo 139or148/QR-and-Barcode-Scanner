@@ -22,7 +22,7 @@ Html5Qrcode.getCameras().then(cameras => {
        // Create instance of the object.
        // The only argument is the “id” of HTML element created above.
        //var html5QrCode = new Html5Qrcode.start(
-       const html5QrCode = new Html5Qrcode("reader");
+       var html5QrCode = new Html5Qrcode("reader");
        html5QrCode.start(
           cameraId, // retreived in the previous step.
           {
