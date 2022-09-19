@@ -54,10 +54,18 @@ body {
   background-color: white;
 }
 </style>
-    
+     
     
 <body>
+<div id="container">
+    <canvas hidden="" id="qr-canvas"></canvas>
+</div>      
+    
 <script>
+const video = document.createElement("video");
+const canvasElement = document.getElementById("qr-canvas");
+const canvas = canvasElement.getContext("2d");    
+    
 qrcode.callback = (res) => {
   if (res) {
     alert(res);
@@ -67,14 +75,12 @@ qrcode.callback = (res) => {
 navigator.mediaDevices
   .getUserMedia({ video: { facingMode: "environment" } })
   .then(function(stream) {
+    canvasElement.hidden = false;
     video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
     video.srcObject = stream;
     video.play();
     tick();
     scan();
-     //Restart the camera first
-    video.srcObject.getTracks().forEach(track => {
-      track.stop();
     });
   });
     
