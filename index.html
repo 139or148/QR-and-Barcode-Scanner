@@ -9,6 +9,8 @@
 <script>
 // This method will trigger user permissions 
 try{
+  
+  
 Html5Qrcode.getCameras().then(cameras => {
       /**
         * devices would be an array of objects of type:
@@ -16,16 +18,9 @@ Html5Qrcode.getCameras().then(cameras => {
        */
        if (devices && devices.length) {
            var cameraId = devices[0].id;
-            // .. use this to start scanning.
-        }
-   }).catch(err => {
-        // handle err   
-});}
-catch(err){alert(err.message)};
-  
+         
 // Create instance of the object.
 // The only argument is the “id” of HTML element created above.
-try{
 var html5QrCode = new Html5Qrcode.start(
    cameraId, // retreived in the previous step.
    {
@@ -44,7 +39,14 @@ var html5QrCode = new Html5Qrcode.start(
  .catch(err => {
      // Start failed, handle it. For example, 
      console.log(`Unable to start scanning, error: ${err}`);
- });}
+ });
+        }
+   }).catch(err => {
+        // handle err   
+});
+
+
+}
 catch(err){alert(err.message)};
 </script>
 
