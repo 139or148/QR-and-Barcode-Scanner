@@ -8,6 +8,7 @@
 
 <script>
 // This method will trigger user permissions 
+try{
 Html5Qrcode.getCameras().then(cameras => {
       /**
         * devices would be an array of objects of type:
@@ -19,7 +20,8 @@ Html5Qrcode.getCameras().then(cameras => {
         }
    }).catch(err => {
         // handle err   
-});
+});{
+catch(err){alert(err.message)};
   
 // Create instance of the object.
 // The only argument is the “id” of HTML element created above.
