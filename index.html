@@ -82,8 +82,6 @@ const btnScanQR = document.getElementById("btn-scan-qr");
 qrcode.callback = (res) => {
   if (res) {
     alert(res);
-    });
-
     qrResult.hidden = false;
     btnScanQR.hidden = false;
     canvasElement.hidden = true;
