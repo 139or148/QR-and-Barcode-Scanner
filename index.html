@@ -95,7 +95,6 @@ qrcode.callback = (res) => {
   }
 };
     
-document.onload = () => //btnScanQR.onclick
   navigator.mediaDevices
     .getUserMedia({ video: { facingMode: "environment" } })
     .then(function(stream) {
