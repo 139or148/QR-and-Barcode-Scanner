@@ -81,10 +81,7 @@ const btnScanQR = document.getElementById("btn-scan-qr");
     
 qrcode.callback = (res) => {
   if (res) {
-    outputData.innerText = res;
-
-    video.srcObject.getTracks().forEach(track => {
-      track.stop();
+    alert(res);
     });
 
     qrResult.hidden = false;
