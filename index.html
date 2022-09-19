@@ -77,23 +77,10 @@ const qrResult = document.getElementById("qr-result");
 const outputData = document.getElementById("outputData");
 const btnScanQR = document.getElementById("btn-scan-qr");
     
-qrcode.callback = (res) => {
-  if (res) {
-    outputData.innerText = res;
-
-    video.srcObject.getTracks().forEach(track => {
-      track.stop();
-    });
-  }
-};
-    
   navigator.mediaDevices
     .getUserMedia({ video: { facingMode: "environment" } })
     .then(function(stream) {
       scanning = true;
-      qrResult.hidden = true;
-      btnScanQR.hidden = true;
-      canvasElement.hidden = false;
       video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
       video.srcObject = stream;
       video.play();
